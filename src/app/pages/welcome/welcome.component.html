@@ -1,0 +1,102 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>GitHub</nz-breadcrumb-item>
+  <nz-breadcrumb-item>Search</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-spin [nzSpinning]="loading" [nzSize]="'large'">
+<nz-content>
+  <form nz-form [formGroup]="validateForm" nzLayout="inline" class="ant-advanced-search-form">
+    
+    <div nz-row [nzGutter]="16">
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+        <nz-form-item nzFlex>
+          <nz-form-label nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nzRequired nzSpan="10" nzFor="keyword">Enter keyword to search</nz-form-label>
+          <nz-form-control nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+            <input nz-input type="text" formControlName="keyword" id="keyword" name="keyword" placeholder="Insert Keyword">
+            <nz-form-explain *ngIf="validateForm.get('keyword').dirty && validateForm.get('keyword').errors">
+              Please enter the keyword
+            </nz-form-explain>
+          </nz-form-control>
+          
+        </nz-form-item>
+      </div>
+    </div>
+    
+    <div nz-row [nzGutter]="16">
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+        <nz-form-item nzFlex>
+          <nz-form-label nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nzRequired nzSpan="10" nzFor="searchCriteria">Select a criteria to search</nz-form-label>
+          <nz-form-control nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+            <nz-radio-group (ngModelChange)="criteriaChange()" formControlName="searchCriteria" name="searchCriteria" id="searchCriteria">
+              <label nz-radio nzValue="language">Language</label>
+              <label nz-radio nzValue="topic">Topic</label>
+            </nz-radio-group>
+            <nz-form-explain *ngIf="validateForm.get('searchCriteria').dirty && validateForm.get('searchCriteria').errors">
+              Please select one of the search criteria
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="16" *ngIf="criteria === 'language'">
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+        <nz-form-item nzFlex>
+          <nz-form-label nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nzRequired nzSpan="10" nzFor="language">Select a language</nz-form-label>
+          <nz-form-control nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+            <nz-select nzShowSearch nzAllowClear formControlName="language" name="language" id="language" nzPlaceHolder="Select a language">
+              <nz-option nzLabel="Java" nzValue="java"></nz-option>
+              <nz-option nzLabel="JavaScipt" nzValue="javascript"></nz-option>
+              <nz-option nzLabel="TypeScript" nzValue="typescript"></nz-option>
+              <nz-option nzLabel="Python" nzValue="python"></nz-option>
+              <nz-option nzLabel="Ruby" nzValue="ruby"></nz-option>
+              <nz-option nzLabel="C++" nzValue="c++"></nz-option>
+              <nz-option nzLabel="C" nzValue="c"></nz-option>
+              <nz-option nzLabel="C#" nzValue="c#"></nz-option>
+              <nz-option nzLabel="Shell" nzValue="shell"></nz-option>
+              <nz-option nzLabel="PhP" nzValue="php"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    
+
+    <div nz-row>
+      <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button [nzType]="'primary'" (click)="submitForm()">Search</button>
+        <button nz-button (click)="resetForm()">Clear</button>
+      </div>
+    </div>
+  </form>
+
+  <nz-card>
+    <nz-table #ajaxTable nzShowSizeChanger [nzFrontPagination]="false"
+      [nzTotal]="pagination.total" [(nzPageIndex)]="pagination.page" [(nzPageSize)]="pagination.limit"
+      (nzPageIndexChange)="submitForm()" (nzPageSizeChange)="submitForm(true)" [nzData]="repoReponse"
+      [nzScroll]="{x:'800px'}">
+      <thead>
+        <tr>
+          <th style="min-width: 150px;">Repository Name</th>
+          <th style="min-width: 150px;">Owner</th>
+          <th style="min-width: 96px;">Description</th>
+          <th style="min-width: 88px;">Language</th>
+          <th style="min-width: 97px;">Go To</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let data of ajaxTable.data">
+          <td>{{data.repoName}}</td>
+          <td>{{data.repoOwner}}</td>
+          <td>{{data.repoDescription}}</td>
+          <td>{{data.language}}</td>
+          <td>
+            <button (click)="goToUrl(data.repoUrl)" nz-button nz-popover nzContent="Go to"><i nz-icon nzType="link" nzTheme="outline"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-card>
+</nz-content>
+</nz-spin>

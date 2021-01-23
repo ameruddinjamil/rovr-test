@@ -1,0 +1,31 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Reporting</nz-breadcrumb-item>
+  <nz-breadcrumb-item>View</nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-spin [nzSpinning]="loading" [nzSize]="'large'">
+  <nz-content>
+    <nz-card>
+      <nz-table #ajaxTable [nzData]="reportingObject.items"
+        [nzScroll]="{x:'800px'}">
+        <thead>
+          <tr>
+            <th style="min-width: 150px;">Date</th>
+            <th style="min-width: 150px;">Keyword search</th>
+            <th style="min-width: 96px;">Download Response</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let data of ajaxTable.data">
+            <td>{{data.date}}</td>
+            <td>{{data.keyword}}</td>
+            <td>
+              <button (click)="download(data.response)" nz-button><i nz-icon nzType="download" nzTheme="outline"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+  </nz-content>
+</nz-spin>
