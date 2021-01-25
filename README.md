@@ -1,27 +1,24 @@
-# RovrTest
+# Welcome to Rovr-Test Repo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+Welcome to my repository for the **Rovr-Test repository**. The function of this project is to create a simple App for the User to search the GitHub Repository using language or topic and used the search criteria to generate the report for the admin later
 
-## Development server
+# Technology Used
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Technology used in the project is **Angular** and [**Ng Ant Design**](https://ng.ant.design/version/8.5.x/docs/introduce/en) as the UI framework
 
-## Code scaffolding
+# Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - Make sure your machine have the Node.JS install. Otherwise, go to [here](https://nodejs.org/en/about/releases/) to download.
+ - Next item is, you need a Angular CLI. You use the Angular CLI to create projects, generate application and library code, and perform a variety of ongoing development tasks such as testing, bundling, and deployment.
+ `npm install -g @angular/cli`
 
-## Build
+# Running the project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Clone the repo in your local machine
+- Open the CMD and change directory (cd) to the repo path
+- Then run `npm install`to start installing all the library and dependencies for the project 
+-  After finish all the installing, run `npm run start` and the local development will be run at `http://localhost:4200`
+- Open the browser and open the `http://localhost:4200` 
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Unit Testing
+To be honest, I never did a Unit Testing using a **Jasmine**, or **Karma** before
